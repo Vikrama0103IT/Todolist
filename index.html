@@ -1,118 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>To-Do List</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f7f8;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 40px;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  margin: 0;
+  padding-top: 40px;
+}
 
-    .container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-    }
+.container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 520px;
+  transition: transform 0.3s ease;
+}
 
-    h2 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
+.container:hover {
+  transform: scale(1.01);
+}
 
-    input[type="text"] {
-      width: 60%;
-      padding: 10px;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 26px;
+}
 
-    button {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 6px;
-      background-color: #4CAF50;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+input[type="text"] {
+  width: 60%;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
 
-    button:hover {
-      background-color: #45a049;
-    }
+input[type="text"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
 
-    .date-group {
-      margin-top: 30px;
-    }
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    .date-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #555;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
-    }
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin-top: 0;
-    }
+.date-group {
+  margin-top: 30px;
+}
 
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #f9f9f9;
-      margin-bottom: 10px;
-      padding: 10px 14px;
-      border-radius: 6px;
-      transition: background 0.3s ease;
-      flex-wrap: wrap;
-    }
+.date-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 6px;
+  padding-left: 5px;
+}
 
-    li:hover {
-      background: #eee;
-    }
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0;
+}
 
-    li input[type="checkbox"] {
-      margin-right: 10px;
-      transform: scale(1.2);
-    }
+li {
+  display: flex;
+  flex-direction: column;
+  background: #fefefe;
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-left: 5px solid #4CAF50;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+}
 
-    li.done {
-      text-decoration: line-through;
-      color: #888;
-    }
+li:hover {
+  background: #f1fdf2;
+}
+.add-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  gap: 10px;
+}
 
-    li button {
-      background: none;
-      color: red;
-      font-size: 18px;
-      cursor: pointer;
-      border: none;
-    }
-  </style>
+
+.task-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+li input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+li.done .task-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.task-text {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.task-actions button {
+  background: none;
+  color: #ff5555;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  margin-left: 10px;
+  transition: color 0.2s ease;
+}
+
+.task-actions button:hover {
+  color: #c62828;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+  padding-left: 2px;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .task-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .task-text {
+    font-size: 15px;
+  }
+
+  .task-actions {
+    align-self: flex-end;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .timestamp {
+    font-size: 11px;
+  }
+}
+</style>
 </head>
 <body>
   <div class="container">
     <h2>To-Do List</h2>
-    <input type="text" id="taskInput" placeholder="Add a new task..." />
-    <button onclick="addTask()">Add</button>
+    <div class="add-task">
+  <input type="text" id="taskInput" placeholder="Add a new task..." />
+  <button onclick="addTask()">Add</button>
+</div>
     <div id="taskGroups"></div>
   </div>
 
@@ -121,6 +214,17 @@
 
     function saveTasks() {
       localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    function getCurrentDateTime() {
+      const now = new Date();
+      const date = now.toLocaleDateString('en-GB', {
+        day: '2-digit', month: 'short', year: 'numeric'
+      });
+      const time = now.toLocaleTimeString('en-GB', {
+        hour: '2-digit', minute: '2-digit'
+      });
+      return `${date}, ${time}`;
     }
 
     function groupTasksByDate(tasks) {
@@ -133,50 +237,63 @@
       }, {});
     }
 
-   function renderTasks() {
-  const container = document.getElementById("taskGroups");
-  container.innerHTML = "";
+    function renderTasks() {
+      const container = document.getElementById("taskGroups");
+      container.innerHTML = "";
 
-  const grouped = groupTasksByDate(tasks);
+      const grouped = groupTasksByDate(tasks);
 
-  Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a)).forEach(date => {
-    const section = document.createElement("div");
-    section.className = "date-group";
+      Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a)).forEach(date => {
+        const section = document.createElement("div");
+        section.className = "date-group";
 
-    const heading = document.createElement("div");
-    heading.className = "date-title";
-    heading.textContent = `🗓️ ${date}`;
-    section.appendChild(heading);
+        const heading = document.createElement("div");
+        heading.className = "date-title";
+        heading.textContent = `🗓️ ${date}`;
+        section.appendChild(heading);
 
-    const list = document.createElement("ul");
+        const list = document.createElement("ul");
 
-    grouped[date].forEach((task, i) => {
-      const li = document.createElement("li");
-      li.className = task.completed ? "done" : "";
+        grouped[date].forEach((task, i) => {
+          const li = document.createElement("li");
+          if (task.completed) li.classList.add("done");
 
-      const taskSpan = document.createElement("span");
-      taskSpan.innerHTML = `
-        <input type="checkbox" ${task.completed ? "checked" : ""} />
-        <strong>${i + 1}.</strong> ${task.text}
-      `;
+          const row = document.createElement("div");
+          row.className = "task-row";
 
-      const checkbox = taskSpan.querySelector("input[type='checkbox']");
-      checkbox.addEventListener("change", () => toggleTask(task.id));
+          const left = document.createElement("span");
+          left.className = "task-text";
+          left.innerHTML = `
+            <input type="checkbox" ${task.completed ? "checked" : ""}>
+            <strong>${i + 1}.</strong> &nbsp; <span>${task.text}</span>
+          `;
 
-      const deleteBtn = document.createElement("button");
-      deleteBtn.textContent = "❌";
-      deleteBtn.addEventListener("click", () => deleteTask(task.id));
+          const checkbox = left.querySelector("input");
+          checkbox.addEventListener("change", () => toggleTask(task.id));
 
-      li.appendChild(taskSpan);
-      li.appendChild(deleteBtn);
-      list.appendChild(li);
-    });
+          const actions = document.createElement("span");
+          actions.className = "task-actions";
+          actions.innerHTML = `
+            <button onclick="editTask('${task.id}')">✏️</button>
+            <button onclick="deleteTask('${task.id}')">❌</button>
+          `;
 
-    section.appendChild(list);
-    container.appendChild(section);
-  });
-}
+          row.appendChild(left);
+          row.appendChild(actions);
 
+          const timestamp = document.createElement("div");
+          timestamp.className = "timestamp";
+          timestamp.textContent = `🕒 Last updated: ${task.updatedAt}`;
+
+          li.appendChild(row);
+          li.appendChild(timestamp);
+          list.appendChild(li);
+        });
+
+        section.appendChild(list);
+        container.appendChild(section);
+      });
+    }
 
     function addTask() {
       const input = document.getElementById("taskInput");
@@ -189,10 +306,11 @@
           year: 'numeric'
         });
         const task = {
-          id: Date.now().toString(), // unique ID
+          id: Date.now().toString(),
           text,
           completed: false,
-          date: dateString
+          date: dateString,
+          updatedAt: getCurrentDateTime()
         };
         tasks.push(task);
         input.value = "";
@@ -205,6 +323,7 @@
       const task = tasks.find(t => t.id === id);
       if (task) {
         task.completed = !task.completed;
+        task.updatedAt = getCurrentDateTime();
         saveTasks();
         renderTasks();
       }
@@ -216,8 +335,18 @@
       renderTasks();
     }
 
+    function editTask(id) {
+      const task = tasks.find(t => t.id === id);
+      const newText = prompt("Edit task:", task.text);
+      if (newText !== null && newText.trim() !== "") {
+        task.text = newText.trim();
+        task.updatedAt = getCurrentDateTime();
+        saveTasks();
+        renderTasks();
+      }
+    }
+
     renderTasks();
   </script>
 </body>
 </html>
-
